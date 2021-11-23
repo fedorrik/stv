@@ -13,7 +13,7 @@ Output files:
   
 • stv_row.bed - same as stv.bed but doesn't contain stv numbering, colors, the first description line
 
-• stats.tsv - contains the number of each stv in each chr/contig
+• stv_stats.tsv - contains the number of each stv in each chr/contig
 ___
 
 Method:
