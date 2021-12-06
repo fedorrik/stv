@@ -8,7 +8,7 @@ then
 fi
 
 # put here path to dir with program
-path='/storage/Bioinformatic/centromere/AnVIL/fedorrik/stv'
+path='/home/fedor/Programs/my/stv'
 
 # take live HORs only
 python3 $path/scripts/live_HORs_filter.py $1 > AS_liveHORs.bed
