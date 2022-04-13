@@ -27,14 +27,14 @@ def name_reverser(name):
     name = name.replace('(5_6/4_)', '(X)')
     name_splitted = name.split('.')
     name_digits = '.'.join(name_splitted[1:])
-    # Braindead line. Split name first by '_' and than by '-'. Than reverse both. So S1C12H1L.8-4_7-1 --> [['1', '7'], ['4', '8']]
+    # Split name first by '_' and than by '-'. Than reverse both. So S1C12H1L.8-4_7-1 --> [['1', '7'], ['4', '8']]
     items = list(reversed([list(reversed(i.split('-'))) for i in name_digits.split('_')]))
-    # shit with cen1 inversion
+    # cen1 inversion issues 
     for i in range(len(items)):
         for j in range(len(items[i])):
             if 'X' in items[i][j]:
                 items[i][j] = '{}{}{}'.format(items[i][j].split('}')[1], items[i][j].split('}')[0], '}')
-    # And now join this shit back
+    # join it back
     reversed_name = '_'.join(['-'.join(i) for i in items])
     reversed_name = reversed_name.replace('(X)', '(_6/4_5)')
     return '.'.join([name_splitted[0], reversed_name])
@@ -46,14 +46,14 @@ with open(argv[1]) as bed:
     for line in bed:
         input_bed.append(line.split())
 
-# cen1 separatly because inversion
+# cen1 separatly because of inversion
 chr1_bed = [line for line in input_bed if line[0] == 'chr1']
 inversion_names_backup = []
 for line in chr1_bed:
     if line[5] == '-':
         inversion_names_backup.append(line[3])
         line[3] = name_reverser(line[3])
-# print coloured chr1
+# print colored chr1
 stv_stat = count_uniq_stv(chr1_bed)
 cnt = -1
 for stv in stv_clever_coloring(chr1_bed, stv_stat):

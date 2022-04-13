@@ -27,7 +27,7 @@ for line in input_bed:
     if strand == '-':
         name_splitted = name.split('.')
         name_digits = '.'.join(name_splitted[1:])
-        # Braindead line. Split name first by '_' and than by '-'. Than reverse both. So S1C12H1L.8-4_7-1 --> [['1', '7'], ['4', '8']]
+        # Split name first by '_' and than by '-'. Than reverse both. So S1C12H1L.8-4_7-1 --> [['1', '7'], ['4', '8']]
         items = list(reversed([list(reversed(i.split('-'))) for i in name_digits.split('_')]))
         # shit with cen1 inversion
         if chr == 'chr1':
@@ -35,12 +35,12 @@ for line in input_bed:
                 for j in range(len(items[i])):
                     if 'X' in items[i][j]:
                         items[i][j] = '{}{}{}'.format(items[i][j].split('}')[1], items[i][j].split('}')[0], '}')
-        # And now join this shit back
+        # And now join it back
         reversed_name = '_'.join(['-'.join(i) for i in items])
         line[3] = '.'.join([name_splitted[0], reversed_name])
     line[3] = line[3].replace('(X)', '(_6/4_5)')
 
-input_bed.append(['chr24'] + input_bed[0][1:])  # idk wtf is with last chr. Let's add shit for chrX not to be the last chr. 
+input_bed.append(['chr24'] + input_bed[0][1:])  # crutch to make last chr/contig not the last 
 current_chr = input_bed[0][0]
 current_bed = []
 start = input_bed[0][1]
