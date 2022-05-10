@@ -29,7 +29,7 @@ for line in input_bed:
         name_digits = '.'.join(name_splitted[1:])
         # Split name first by '_' and than by '-'. Than reverse both. So S1C12H1L.8-4_7-1 --> [['1', '7'], ['4', '8']]
         items = list(reversed([list(reversed(i.split('-'))) for i in name_digits.split('_')]))
-        # shit with cen1 inversion
+        # cen1 inversion prblm
         if chr == 'chr1':
             for i in range(len(items)):
                 for j in range(len(items[i])):
