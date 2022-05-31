@@ -22,7 +22,7 @@ Method:
 
 1. Extract only "live HORs" from the input bed.
 2. Iterate through AS_liveHORs.bed merging monomers. StV is cut after the last monomer (the one with maximal number in a given array) or before the first monomer (or vice versa in the case of a "-" strand).
-3. Squizze huge "6/4_5" dimer stretches in the human cen1/cen5/cen19 (it works only if the 1st column of input bed is "chr1" or "chr5" or "chr19").
+3. Squizze huge "6/4_5" dimer stretches in the human cen1/cen5/cen19.
 4. Count StV stats.
 5. Add numbering and colors. 
 
