@@ -18,6 +18,7 @@ for line in input_bed:
         line[3] = '#{}:{}'.format(cnt, line[3])
         print('\t'.join(line))
     else:
-        cnt = 0
+        cnt = 1
         current_chr = line[0]
+        line[3] = '#{}:{}'.format(cnt, line[3])
         print('\t'.join(line))
