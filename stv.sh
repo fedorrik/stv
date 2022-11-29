@@ -16,8 +16,9 @@ python3 $path/scripts/live_HORs_filter.py $1 > AS_liveHORs.bed
 # monomers to StVs
 python3 $path/scripts/mon2stv.py AS_liveHORs.bed > stv_row.bed
 
-# stats file
+# stats files
 python3 $path/scripts/bed2stat.py stv_row.bed > stv_stats.tsv
+python3 $path/scripts/stats2table.py stv_stats.tsv
 
 # coloring
 python3 $path/scripts/coloring.py stv_row.bed > stv_colored.bed
