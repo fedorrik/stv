@@ -27,7 +27,7 @@ python3 $path/scripts/coloring.py stv_row.bed > stv_colored.bed
 python3 $path/scripts/numbering.py stv_colored.bed > stv.bed
 
 # add descriotion line
-sed -i "1 i\track name=\"ASat_StV\" description=\"ASat HORs Structural Variants\" itemRgb=\"On\" visibility=\"1\"" stv.bed
+# sed -i "1 i\track name=\"ASat_StV\" description=\"ASat HORs Structural Variants\" itemRgb=\"On\" visibility=\"1\"" stv.bed
 
 rm stv_colored.bed
 rm AS_liveHORs.bed

@@ -1,6 +1,6 @@
 # StV
 
-HOR Structrual Variant (StV) prediction using HOR-monomer annotation
+HOR Structural Variant (StV) prediction using HOR-monomer annotation
 
 Usage: ./stv.sh input.bed
 
@@ -22,10 +22,10 @@ Method:
 
 1. Extract only "live HORs" from the input bed.
 2. Iterate through AS_liveHORs.bed merging monomers. StV is cut after the last monomer (the one with maximal number in a given array) or before the first monomer (or vice versa in the case of a "-" strand).
-3. Squizze huge "6/4_5" dimer stretches in the human cen1/cen5/cen19.
+3. Squeeze huge "6/4_5" dimer stretches in the human cen1/cen5/cen19.
 4. Count StV stats.
 5. Add numbering and colors. 
 
 ___
 
-[Here](https://github.com/fedorrik/stv_chm13) is special version for T2T-CHM13 assembly which was used in the ["Complete genomic and epigenetic maps of human centromeres"](https://www.science.org/doi/10.1126/science.abl4178) artical.
+[Here](https://github.com/fedorrik/stv_chm13) is special version for T2T-CHM13 assembly which was used in the ["Complete genomic and epigenetic maps of human centromeres"](https://www.science.org/doi/10.1126/science.abl4178) article.

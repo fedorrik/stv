@@ -221,6 +221,18 @@ for contig in contigs:
         strand = line[5]
         mons_numbers.append(n)
         if strand == '+':
+
+            # cut before mon which is after gap
+            if int(line[1])-int(end) > 160:
+                mons_numbers.pop()
+                # check if mon isn't lonly mon
+                if len(mons_numbers) > 0:
+                    stv_name = stv_namer(name, mons_numbers, strand)
+                    stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                start = line[1]
+                stv_name = []
+                mons_numbers = [n]                
+
             # max mon (or max mon last in hybrid) THAN cut after it
             if n == max_mon or n[-2:] == '/{}'.format(max_mon) or n[-3:] == '/{}'.format(max_mon):
                 end = line[2]
@@ -232,8 +244,8 @@ for contig in contigs:
                 n_prev = n
                 is_prev_max = True
                 continue
-            # first mon (or first mon is 1st in hybrid) AND previous wasn't max (or hybrid with max) OR big gap before THAN cut before it
-            elif ((n == '1' or n[:2] == '1/') and is_prev_max == False) or int(line[1])-int(end) > 200:
+            # first mon (or first mon is 1st in hybrid) AND previous wasn't max (or hybrid with max)
+            elif ((n == '1' or n[:2] == '1/') and is_prev_max == False):
                 mons_numbers.pop()
                 # check if mon isn't lonly mon
                 if len(mons_numbers) > 0:
@@ -245,7 +257,24 @@ for contig in contigs:
             end = line[2]
             n_prev = n
             is_prev_max = False
+
+
         else: # strand == '-'
+
+            # cut before mon which is after gap
+            if int(line[1])-int(end) > 160:
+                # check if mon isn't lonly mon
+                mons_numbers.pop()
+                if len(mons_numbers) > 0:
+                    stv_name = stv_namer(name, mons_numbers, strand)
+                    stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                start = line[1]
+                stv_name = []
+                if n == max_mon:
+                    mons_numbers = [max_mon]
+                else:
+                    mons_numbers = [n]
+
             # first mon (or 1st is the last in hybrid) THAN cut after it
             if n == '1' or n[-2:] == '/1':
                 end = line[2]
@@ -269,7 +298,7 @@ for contig in contigs:
                 else:
                     mons_numbers = [n]
             # max mon (or max is 1st in hybrid) AND previous wasn't the first
-            elif ((n == max_mon or n[:2] == '{}/'.format(max_mon) or n[-3:] == '{}/'.format(max_mon)) and is_prev_max == False and contig != 'chr1') or int(line[1])-int(end) > 200:
+            elif ((n == max_mon or n[:2] == '{}/'.format(max_mon) or n[-3:] == '{}/'.format(max_mon)) and is_prev_max == False and contig != 'chr1'):
                 # check if mon isn't lonly mon
                 mons_numbers.pop()
                 if len(mons_numbers) > 0:
