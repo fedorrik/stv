@@ -14,10 +14,10 @@ path='/home/fedor/Programs/my/stv'
 python3 $path/scripts/live_HORs_filter.py $1 > AS_liveHORs.bed
 
 # monomers to StVs
-python3 $path/scripts/mon2stv.py AS_liveHORs.bed > stv_row.bed
+python3 $path/scripts/mon2stv.py AS_liveHORs.bed > stv_raw.bed
 
 # stats files
-python3 $path/scripts/bed2stat.py stv_row.bed > stv_stats.tsv
+python3 $path/scripts/bed2stat.py stv_raw.bed > stv_stats.tsv
 python3 $path/scripts/stats2table.py stv_stats.tsv
 
 # coloring

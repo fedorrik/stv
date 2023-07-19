@@ -13,7 +13,7 @@ Output files:
 
 • stv.bed - resulting file which can be put in the browser
   
-• stv_row.bed - same as stv.bed but doesn't contain stv numbering, colors, the first description line
+• stv_raw.bed - same as stv.bed but doesn't contain stv numbering, colors, the first description line
 
 • stv_stats.tsv - contains the number of each stv in each chr/contig
 ___
