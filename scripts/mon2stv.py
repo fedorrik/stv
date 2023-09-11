@@ -215,6 +215,7 @@ for contig in contigs:
     start = live_mons[0][1]
     end = live_mons[0][2]
     is_prev_max = True
+    strand_prev = ''
     for line in live_mons:
         #print(line)
         name, n = line[3].split('.')
@@ -227,8 +228,8 @@ for contig in contigs:
                 mons_numbers.pop()
                 # check if mon isn't lonly mon
                 if len(mons_numbers) > 0:
-                    stv_name = stv_namer(name, mons_numbers, strand)
-                    stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                    stv_name = stv_namer(name, mons_numbers, strand_prev)
+                    stvs.append([contig, start, end, stv_name, '0', strand_prev, start, end, '0,0,0'])
                 start = line[1]
                 stv_name = []
                 mons_numbers = [n]                
@@ -236,8 +237,8 @@ for contig in contigs:
             # max mon (or max mon last in hybrid) THAN cut after it
             if n == max_mon or n[-2:] == '/{}'.format(max_mon) or n[-3:] == '/{}'.format(max_mon):
                 end = line[2]
-                stv_name = stv_namer(name, mons_numbers, strand)
-                stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                stv_name = stv_namer(name, mons_numbers, strand_prev)
+                stvs.append([contig, start, end, stv_name, '0', strand_prev, start, end, '0,0,0'])
                 start = line[2]
                 stv_name = []
                 mons_numbers = []
@@ -257,6 +258,7 @@ for contig in contigs:
             end = line[2]
             n_prev = n
             is_prev_max = False
+            strand_prev = strand
 
 
         else: # strand == '-'
@@ -266,8 +268,8 @@ for contig in contigs:
                 # check if mon isn't lonly mon
                 mons_numbers.pop()
                 if len(mons_numbers) > 0:
-                    stv_name = stv_namer(name, mons_numbers, strand)
-                    stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                    stv_name = stv_namer(name, mons_numbers, strand_prev)
+                    stvs.append([contig, start, end, stv_name, '0', strand_prev, start, end, '0,0,0'])
                 start = line[1]
                 stv_name = []
                 if n == max_mon:
@@ -278,8 +280,8 @@ for contig in contigs:
             # first mon (or 1st is the last in hybrid) THAN cut after it
             if n == '1' or n[-2:] == '/1':
                 end = line[2]
-                stv_name = stv_namer(name, mons_numbers, strand)
-                stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
+                stv_name = stv_namer(name, mons_numbers, strand_prev)
+                stvs.append([contig, start, end, stv_name, '0', strand_prev, start, end, '0,0,0'])
                 start = line[2]
                 stv_name = []
                 mons_numbers = []
@@ -313,6 +315,8 @@ for contig in contigs:
             end = line[2]
             n_prev = n
             is_prev_max = False
+            strand_prev = strand
+
     if len(mons_numbers) > 0:
         stv_name = stv_namer(name, mons_numbers, strand)
         stvs.append([contig, start, end, stv_name, '0', strand, start, end, '0,0,0'])
