@@ -215,7 +215,7 @@ for contig in contigs:
     start = live_mons[0][1]
     end = live_mons[0][2]
     is_prev_max = True
-    strand_prev = ''
+    strand_prev = live_mons[0][5]
     for line in live_mons:
         #print(line)
         name, n = line[3].split('.')
