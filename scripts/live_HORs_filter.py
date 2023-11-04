@@ -35,7 +35,8 @@ for line in input_bed:
         HOR_name = line[3].split('.')[0]
         if HOR_name[-1] == 'L':
             contig_live_HORs.append(HOR_name)
-live_HORs[contig] = Counter(contig_live_HORs).most_common(1)[0][0]
+if len(contig_live_HORs) > 0:
+    live_HORs[contig] = Counter(contig_live_HORs).most_common(1)[0][0]
 
 # print chosen HORs
 for line in input_bed:
