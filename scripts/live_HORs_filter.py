@@ -18,14 +18,14 @@ live_HORs = {}
 contig_live_HORs = []
 for line in input_bed:
     if line[0] == contig: # current contig
-        
+
         # take all live HOR in list
         HOR_name = line[3].split('.')[0]
         if HOR_name[-1] == 'L':
             contig_live_HORs.append(HOR_name)
 
     else: # next contig
-        # deal with previous cintig
+        # deal with previous contig
         if len(contig_live_HORs) > 0:
             live_HORs[contig] = Counter(contig_live_HORs).most_common(1)[0][0]
         # start procces next contig
@@ -34,8 +34,10 @@ for line in input_bed:
         # procces first line
         HOR_name = line[3].split('.')[0]
         if HOR_name[-1] == 'L':
-            contig_live_HORs.append(HOR_name)
-live_HORs[contig] = Counter(contig_live_HORs).most_common(1)[0][0]
+            contig_live_HORs.append(HOR_name)            
+
+if len(contig_live_HORs) > 0: # fix error when last contig has no live HORs
+    live_HORs[contig] = Counter(contig_live_HORs).most_common(1)[0][0]
 
 # print chosen HORs
 for line in input_bed:
